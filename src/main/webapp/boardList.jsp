@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +81,16 @@
 		<c:forEach var="boardDT" items="${boar }">
 			<tr>
 				<td>${boardDT.bnum }</td>
-				<td><a href="#">${boardDT.btitle }</a></td>
+				<td>
+				<c:choose>
+				<c:when test="${fn:length(boardDT.btitle) > 40}">
+							<a href="#">${fn:substring(boardDT.btitle, 0, 40)}...</a>
+						</c:when>
+				<c:otherwise>
+					${boardDT.btitle }
+				</c:otherwise>
+				</c:choose>
+				</td>
 				<td>${boardDT.bwriter }</td>
 				<td>${boardDT.bdate }</td>
 			</tr>
